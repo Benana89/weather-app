@@ -51,27 +51,34 @@ const Weather = () => {
         <button onClick={handleFetchWeather}>Get Weather</button>
       </div>
       {error && <p>{error}</p>}
-      <div className="weather-area">
-        <div className="header-left">
-          <div>Today's Weather</div>
-          <div className="main-temperature">{weatherData.main.temp}°</div>
-          <div>
-            H: {weatherData.main.temp_max}° L: {weatherData.main.temp_min}°
-          </div>
-          <div>
-            {weatherData.name}, {weatherData.sys.country}
-          </div>
-        </div>
 
+      <div className="weather-area">
+        {weatherData && (
+          <div className="header-left">
+            <div>Today's Weather</div>
+            <div className="main-temperature">{weatherData.main.temp}°</div>
+            <div>
+              H: {weatherData.main.temp_max}° L: {weatherData.main.temp_min}°
+            </div>
+            <div>
+              {weatherData.name}, {weatherData.sys.country}
+            </div>
+          </div>
+        )}
         <div className="search-area">
           <div className="search-text">Search History</div>
-          <div>
-            {searchHistory.map((search, index) => (
-              <div className="search-item" key={index}>
-                {search}
-              </div>
-            ))}
-          </div>
+
+          {searchHistory.length === 0 ? (
+            <p>No Record</p>
+          ) : (
+            <div>
+              {searchHistory.map((search, index) => (
+                <div className="search-item" key={index}>
+                  {search}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
