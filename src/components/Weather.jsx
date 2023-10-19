@@ -6,9 +6,10 @@ const Weather = () => {
   const [country, setCountry] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+  const [searchHistory, setSearchHistory] = useState([]);
 
   const apiKey = "17bbda84c541166d22dd2daf6185f992"; // Replace with your API key
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric`;
 
   const handleFetchWeather = () => {
     fetch(apiUrl)
@@ -20,6 +21,12 @@ const Weather = () => {
       })
       .then((data) => {
         setWeatherData(data);
+
+        // Add the search to the search history
+        setSearchHistory([
+          ...searchHistory,
+          `${data.name}, ${data.sys.country}`,
+        ]);
       })
       .catch((error) => {
         setError(error.message);
@@ -27,8 +34,7 @@ const Weather = () => {
   };
 
   return (
-    <div>
-      <h1>Weather App</h1>
+    <div className="overall-area">
       <div>
         <input
           type="text"
@@ -45,15 +51,29 @@ const Weather = () => {
         <button onClick={handleFetchWeather}>Get Weather</button>
       </div>
       {error && <p>{error}</p>}
-      {weatherData && (
-        <div>
-          <h2>
-            Weather in {weatherData.name}, {weatherData.sys.country}
-          </h2>
-          <p>Temperature: {weatherData.main.temp} °C</p>
-          <p>Weather: {weatherData.weather[0].description}</p>
+      <div className="weather-area">
+        <div className="header-left">
+          <div>Today's Weather</div>
+          <div className="main-temperature">{weatherData.main.temp}°</div>
+          <div>
+            H: {weatherData.main.temp_max}° L: {weatherData.main.temp_min}°
+          </div>
+          <div>
+            {weatherData.name}, {weatherData.sys.country}
+          </div>
         </div>
-      )}
+
+        <div className="search-area">
+          <div className="search-text">Search History</div>
+          <div>
+            {searchHistory.map((search, index) => (
+              <div className="search-item" key={index}>
+                {search}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
