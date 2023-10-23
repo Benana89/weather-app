@@ -2,6 +2,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import cloud from "../assets/cloud.png";
 import sun from "../assets/sun.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 const Weather = () => {
   const [city, setCity] = useState("");
@@ -34,10 +38,14 @@ const Weather = () => {
       .then((data) => {
         setWeatherData(data);
 
+        const currentTime = moment().format("DD-MM-YYYY hh:mm:ss a");
         // Add the search to the search history
         setSearchHistory([
           ...searchHistory,
-          `${data.name}, ${data.sys.country}`,
+          {
+            location: `${data.name}, ${data.sys.country}`,
+            timestamp: currentTime,
+          },
         ]);
       })
       .catch((error) => {
@@ -90,7 +98,10 @@ const Weather = () => {
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         />
-        <button onClick={handleFetchWeather}>Get Weather</button>
+
+        <button className="search-btn ml-2" onClick={handleFetchWeather}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+        </button>
         {error && <p>{error}</p>}
       </div>
 
@@ -117,14 +128,21 @@ const Weather = () => {
             <div>
               {searchHistory.map((search, index) => (
                 <div className="search-item" key={index}>
-                  {search}
+                  {search.location}
 
                   <div>
-                    <button onClick={() => handleReselectSearch(index)}>
-                      Re-Search
+                    <span className="mr-2"> {search.timestamp}</span>
+                    <button
+                      className="search-item-btn mr-2"
+                      onClick={() => handleReselectSearch(index)}
+                    >
+                      <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
-                    <button onClick={() => handleDeleteSearch(index)}>
-                      Delete
+                    <button
+                      className="search-item-btn"
+                      onClick={() => handleDeleteSearch(index)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </div>
                 </div>
