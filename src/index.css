@@ -27,6 +27,31 @@ code {
   margin-bottom: 10rem;
 }
 
+.form-control {
+  border-radius: 20px;
+  padding: 1rem;
+
+  padding-bottom: 0.625rem;
+  padding-top: 1.625rem;
+  width: 100%;
+  background-color: #ffffff33;
+  outline: 0;
+}
+
+.floating-input {
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  position: absolute;
+  text-align: start;
+  text-overflow: ellipsis;
+  top: 0;
+  height: 100%;
+  left: 0;
+  padding: 0.75rem;
+
+  color: #00000066;
+  font-size: 0.75rem;
+}
+
 .image-style {
   width: 100%;
 }

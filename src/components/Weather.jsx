@@ -38,7 +38,7 @@ const Weather = () => {
       .then((data) => {
         setWeatherData(data);
 
-        const currentTime = moment().format("DD-MM-YYYY hh:mm:ss a");
+        const currentTime = moment().format("DD-MM-YYYY hh:mm a");
         // Add the search to the search history
         setSearchHistory([
           ...searchHistory,
@@ -85,21 +85,32 @@ const Weather = () => {
 
   return (
     <div className="overall-area">
-      <div className="input-area">
-        <input
-          type="text"
-          placeholder="City"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
-
-        <button className="search-btn ml-2" onClick={handleFetchWeather}>
+      <div className="input-area flex">
+        <div className="relative flex-1	 mr-2">
+          <input
+            className="form-control"
+            id="city"
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <label className="floating-input" htmlFor="city">
+            City
+          </label>
+        </div>
+        <div className="relative flex-1	 mr-2">
+          <input
+            className="form-control"
+            id="country"
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+          <label className="floating-input" htmlFor="country">
+            Country
+          </label>
+        </div>
+        <button className="search-btn" onClick={handleFetchWeather}>
           <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
         </button>
         {error && <p>{error}</p>}
