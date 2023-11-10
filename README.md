@@ -29,7 +29,7 @@ A React app that allows users to input city and country names to retrieve weathe
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/Benana89/weather-app.git
 
 2. Change into the project directory:
 
