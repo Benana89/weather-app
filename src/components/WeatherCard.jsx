@@ -47,19 +47,15 @@ export const WeatherCardContent = () => {
     );
   }
 
-  // Determine H: XX° L: XX° format
   const tempMinMax = `H: ${formatTemp(
     weatherData.main.temp_max
   )}° L: ${formatTemp(weatherData.main.temp_min)}°`;
 
-  // Function to format the current local time based on weather data timezone
   const formatLocalTime = (timezoneOffset) => {
     const utcTime =
       new Date().getTime() + new Date().getTimezoneOffset() * 60000;
-    // Calculate the local time by adding the timezone offset (in seconds)
     const localTime = new Date(utcTime + timezoneOffset * 1000);
 
-    // Use the custom formatter logic for DD-MM-YYYY hh:mm A
     const date = localTime;
 
     const day = String(date.getDate()).padStart(2, "0");
@@ -78,10 +74,8 @@ export const WeatherCardContent = () => {
     return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
   };
 
-  // Weather Data Display (matching the image layout)
   return (
     <div>
-      {/* Top Section: Main Temp and Icon */}
       <div className="flex gap-3 items-end mb-2">
         <div className={textColor}>
           <p
