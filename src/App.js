@@ -46,7 +46,7 @@ const AppCore = () => {
                 <SearchForm />
             </div>
 
-            <div className={`w-full max-w-[700px] mt-[70px] mb-4 backdrop-blur-xl rounded-[30px] p-8 md:p-10 flex flex-col grow ${weatherCardBg}`}>
+            <div className={`w-full max-w-[700px] mt-[70px] mb-4 backdrop-blur-xl rounded-[30px] p-4 md:p-6 flex flex-col grow ${weatherCardBg}`}>
                 
                 <WeatherCardContent />
                 

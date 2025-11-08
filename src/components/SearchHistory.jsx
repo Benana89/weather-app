@@ -23,7 +23,7 @@ export const SearchHistoryList = () => {
     :"text-black/50 bg-white"
 
     return (
-        <div className={`pt-4 mt-6 rounded-[24px] p-8 ${historyCardBg}`}>
+        <div className={`pt-4 mt-6 rounded-[24px] p-4 ${historyCardBg}`}>
             <h2 className="text-lg flex items-center mb-4">
                 Search History
             </h2>
